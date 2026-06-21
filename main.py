@@ -239,7 +239,7 @@ def funcionamento(opcao: int):
         
         # Chama a funcao para calcular o valor de acordo com o metodo escolhido
         resultado = estima_erro_lagrange(lista_pontos, abcissa)
-        print(f"Erro pelo metodo de Lagrange: {resultado:.4f}")
+        print(f"\nErro pelo metodo de Lagrange: {resultado:.4f}")
     
     elif opcao == 6:
         print("\n=== Iniciando a estimativa de erro para o método de Newton ===")
@@ -259,7 +259,7 @@ def funcionamento(opcao: int):
         
         # Chama a funcao para calcular o valor de acordo com o metodo escolhido
         resultado = estima_erro_lagrange(lista_pontos, abcissa)
-        print(f"Erro pelo metodo de Newton: {resultado:.4f}")
+        print(f"\nErro pelo metodo de Newton: {resultado:.4f}")
     
         
     elif opcao == 7:
