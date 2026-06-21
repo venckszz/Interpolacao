@@ -4,10 +4,11 @@
 from sympy import symbols, simplify, expand
 import math
 
+
 def verifica_condicoes(lista_pontos: list):
     
     # Verifica se foram passados menos de 2 pontos
-    if len(lista_pontos) < 4:
+    if len(lista_pontos) < 2:
         print("Inválido! São necessários ao menos 2 pontos para atender às condições")
         return False
     
@@ -19,9 +20,9 @@ def verifica_condicoes(lista_pontos: list):
             return False
 
         else:
-            valores_vistos.append(lista_pontos[i])
+            valores_vistos.append(i)
     
-    return True
+    print("Válido! Os pontos que digitou atendem aos requisitos.")
 
 
 def construir_polinomio_Lagrange(lista_pontos: list):
@@ -150,32 +151,23 @@ def estima_erro_newton(pontos: list, abcissa: float):
 
 
 def funcionamento(opcao: int):
+    print("\nDigite a quantidade de pontos que deseja informar")
+    qtd = int(input("Entrada: "))
+    lista_pontos = []
+        
+     # Recebe os pontos de acordo com a quantidade informada pelo usuario
+    for i in range(qtd):
+        ponto = list(map(float, input(f"Digite o P{i + 1} (x,y): ").split()))
+        x_ponto = ponto[0]
+        y_ponto = ponto[1]
+        lista_pontos.append([x_ponto, y_ponto])
+    
     if opcao == 1:
-        lista_pontos = []
-        
-        print("\n=== Iniciando a verificação de pontos ===")
-        qtd = int(input("Digite a quantidade de pontos que deseja informar: "))
-        for i in range(qtd):
-            ponto = list(map(float, input(f"Digite o ponto P{i + 1} (x,y): ").split()))
-            x_ponto = ponto[0]
-            y_ponto = ponto[1]
-            lista_pontos.append([x_ponto, y_ponto])
-        
+        print("\n======= Iniciando a verificação de pontos =======")
         verifica_condicoes(lista_pontos)
         
     elif opcao == 2:
         print("\n=== Iniciando a interpolação pelo métdo de Lagrange ===")
-        print("Digite a quantidade de pontos que deseja informar")
-        
-        qtd = int(input("Entrada: "))
-        lista_pontos = []
-        
-        # Recebe os pontos de acordo com a quantidade informada pelo usuario
-        for i in range(qtd):
-            ponto = list(map(float, input(f"Digite o P{i + 1} (x,y): ").split()))
-            x_ponto = ponto[0]
-            y_ponto = ponto[1]
-            lista_pontos.append([x_ponto, y_ponto])
         
         # Chama a funcao e simplifica para a impressao
         resultado = construir_polinomio_Lagrange(lista_pontos)
@@ -184,17 +176,6 @@ def funcionamento(opcao: int):
         
     elif opcao == 3:
         print("\n=== Iniciando a interpolação pelo método de Newton ===")
-        print("Digite a quantidade de pontos que deseja informar")
-        
-        qtd = int(input("Entrada: "))
-        lista_pontos = []
-        
-        # Recebe os pontos de acordo com a quantidade informada pelo usuario
-        for i in range(qtd):
-            ponto = list(map(float, input(f"Digite o ponto P{i + 1} (x,y): ").split()))
-            x_ponto = ponto[0]
-            y_ponto = ponto[1]
-            lista_pontos.append([x_ponto, y_ponto])
         
         # Chama a funcao e simplifica para a impressao
         resultado = construir_polinomio_Newton(lista_pontos)
@@ -203,18 +184,6 @@ def funcionamento(opcao: int):
     
     elif opcao == 4:
         print("\n=== Iniciando o cálculo da função para um determinado ponto ===")
-        print("Digite a quantidade de pontos que deseja informar")
-        
-        qtd = int(input("Entrada: "))
-        lista_pontos = []
-        
-        # Recebe os pontos de acordo com a quantidade informada pelo usuario
-        for i in range(qtd):
-            ponto = list(map(float, input(f"Digite o ponto P{i + 1} (x,y): ").split()))
-            x_ponto = ponto[0]
-            y_ponto = ponto[1]
-            lista_pontos.append([x_ponto, y_ponto])
-        
         aux = int(input("Digite o método que deseja utilizar (1 - Lagrange ou 2 - Newton): "))
         abcissa = float(input("Digite o valor da abcissa para o ponto desejado: "))
         
@@ -223,18 +192,6 @@ def funcionamento(opcao: int):
     
     elif opcao == 5:
         print("\n=== Iniciando a estimativa de erro para o método de Lagrange ===")
-        print("Digite a quantidade de pontos que deseja informar")
-        
-        qtd = int(input("Entrada: "))
-        lista_pontos = []
-        
-        # Recebe os pontos de acordo com a quantidade informada pelo usuario
-        for i in range(qtd):
-            ponto = list(map(float, input(f"Digite o ponto P{i + 1} (x,y): ").split()))
-            x_ponto = ponto[0]
-            y_ponto = ponto[1]
-            lista_pontos.append([x_ponto, y_ponto])
-        
         abcissa = float(input("Digite o valor da abcissa para o ponto desejado: "))
         
         # Chama a funcao para calcular o valor de acordo com o metodo escolhido
@@ -243,27 +200,11 @@ def funcionamento(opcao: int):
     
     elif opcao == 6:
         print("\n=== Iniciando a estimativa de erro para o método de Newton ===")
-        print("Digite a quantidade de pontos que deseja informar")
-        
-        qtd = int(input("Entrada: "))
-        lista_pontos = []
-        
-        # Recebe os pontos de acordo com a quantidade informada pelo usuario
-        for i in range(qtd):
-            ponto = list(map(float, input(f"Digite o ponto P{i + 1} (x,y): ").split()))
-            x_ponto = ponto[0]
-            y_ponto = ponto[1]
-            lista_pontos.append([x_ponto, y_ponto])
-        
         abcissa = float(input("Digite o valor da abcissa para o ponto desejado: "))
         
         # Chama a funcao para calcular o valor de acordo com o metodo escolhido
         resultado = estima_erro_lagrange(lista_pontos, abcissa)
         print(f"\nErro pelo metodo de Newton: {resultado:.4f}")
-    
-        
-    elif opcao == 7:
-        print("Encerrando o programa...")
         
 
 def main():
@@ -280,9 +221,13 @@ def main():
         print("7. Sair")
     
         opcao = int(input("Escolha: "))
-        funcionamento(opcao)
         
-        if(opcao == 7): aux = 0
+        if(opcao == 7):
+            print("Encerrando o programa...")
+            aux = 0
+            continue
+            
+        funcionamento(opcao)
 
 
 if __name__ == "__main__":
