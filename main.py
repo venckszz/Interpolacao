@@ -86,55 +86,55 @@ def construir_polinomio_Newton(lista_pontos: list):
     return resultado
     
 
-def calcula_ordenada(pontos: list, abcissa: float, metodo: int):
+def calcula_ordenada(pontos: list, abscissa: float, metodo: int):
     x = symbols('x')
     
     # Calcula o polinomio e substitui o x pelo valor da abcissa informado
     if metodo == 1:
         resultado = construir_polinomio_Lagrange(pontos)
-        polinomio_expandido = simplify(expand(resultado))
-        ordenada = polinomio_expandido.subs(x, abcissa).evalf()
-        print(f"\nA ordenada para x = {abcissa} é: {ordenada:.4f}")
+        polinomio_expandido = expand(resultado)
+        ordenada = polinomio_expandido.subs(x, abscissa).evalf()
+        print(f"\nA ordenada para x = {abscissa} é: {ordenada:.4f}")
     
     elif metodo == 2:
         resultado = construir_polinomio_Newton(pontos)
-        polinomio_expandido = simplify(expand(resultado))
-        ordenada = polinomio_expandido.subs(x, abcissa).evalf()
-        print(f"\nA ordenada para x = {abcissa} é: {ordenada:.4f}")
+        polinomio_expandido = expand(resultado)
+        ordenada = polinomio_expandido.subs(x, abscissa).evalf()
+        print(f"\nA ordenada para x = {abscissa} é: {ordenada:.4f}")
     
     else:
         print("\nErro! Valor informado incompatível")
         return
 
 
-def estima_erro_lagrange(pontos: list, abcissa: float):
+def estima_erro_lagrange(pontos: list, abscissa: float):
     x = symbols('x')
     
     # Calcula o polinomio P(n+1)
     resultado1 = construir_polinomio_Lagrange(pontos)
-    polinomio_expandido = simplify(expand(resultado1))
-    ordenada1 = polinomio_expandido.subs(x, abcissa).evalf()
+    polinomio_expandido = expand(resultado1)
+    ordenada1 = polinomio_expandido.subs(x, abscissa).evalf()
     
     # Calcula o polinomio P(n)
     lista_copiada = []
     lista_copiada.extend(pontos)
     lista_copiada.pop()
     resultado2 = construir_polinomio_Lagrange(lista_copiada)
-    polinomio_expandido = simplify(expand(resultado2))
-    ordenada2 = polinomio_expandido.subs(x, abcissa).evalf()
+    polinomio_expandido = expand(resultado2)
+    ordenada2 = polinomio_expandido.subs(x, abscissa).evalf()
     
     # Aplica a formula E(x) = |P(n+1) - P(n)|
     erro = abs(ordenada1 - ordenada2)
     return erro 
 
 
-def estima_erro_newton(pontos: list, abcissa: float):
+def estima_erro_newton(pontos: list, abscissa: float):
     x = symbols('x')
     
     # Calcula o polinomio P(n+1)
     resultado1 = construir_polinomio_Newton(pontos)
-    polinomio_expandido = simplify(expand(resultado1))
-    ordenada1 = polinomio_expandido.subs(x, abcissa).evalf()
+    polinomio_expandido = expand(resultado1)
+    ordenada1 = polinomio_expandido.subs(x, abscissa).evalf()
     
     lista_copiada = []
     lista_copiada.extend(pontos)
@@ -142,8 +142,8 @@ def estima_erro_newton(pontos: list, abcissa: float):
     
     # Calcula o polinomio P(n)
     resultado2 = construir_polinomio_Newton(lista_copiada)
-    polinomio_expandido = simplify(expand(resultado2))
-    ordenada2 = polinomio_expandido.subs(x, abcissa).evalf()
+    polinomio_expandido = expand(resultado2)
+    ordenada2 = polinomio_expandido.subs(x, abscissa).evalf()
     
     # Aplica a formula E(x) = |P(n+1) - P(n)|
     erro = abs(ordenada1 - ordenada2)
@@ -171,40 +171,42 @@ def funcionamento(opcao: int):
         
         # Chama a funcao e simplifica para a impressao
         resultado = construir_polinomio_Lagrange(lista_pontos)
-        polinomio_expandido = simplify(expand(resultado))
-        print(f"\nPolinômio resultante: {polinomio_expandido}")
+        print(f"\nPolinômio resultante: {resultado}")
+        polinomio_expandido = expand(resultado)
+        print(f"\nPolinômio expandido resultante: {polinomio_expandido}")
         
     elif opcao == 3:
         print("\n=== Iniciando a interpolação pelo método de Newton ===")
         
         # Chama a funcao e simplifica para a impressao
         resultado = construir_polinomio_Newton(lista_pontos)
-        polinomio_expandido = simplify(expand(resultado))
+        print(f"\nPolinômio resultante: {resultado}")
+        polinomio_expandido = expand(resultado)
         print(f"\nPolinômio resultante: {polinomio_expandido}")
     
     elif opcao == 4:
         print("\n=== Iniciando o cálculo da função para um determinado ponto ===")
         aux = int(input("Digite o método que deseja utilizar (1 - Lagrange ou 2 - Newton): "))
-        abcissa = float(input("Digite o valor da abcissa para o ponto desejado: "))
+        abscissa = float(input("Digite o valor da abscissa para o ponto desejado: "))
         
         # Chama a funcao para calcular o valor de acordo com o metodo escolhido
-        resultado = calcula_ordenada(lista_pontos, abcissa, aux)
+        resultado = calcula_ordenada(lista_pontos, abscissa, aux)
     
     elif opcao == 5:
         print("\n=== Iniciando a estimativa de erro para o método de Lagrange ===")
-        abcissa = float(input("Digite o valor da abcissa para o ponto desejado: "))
+        abscissa = float(input("Digite o valor da abcissa para o ponto desejado: "))
         
         # Chama a funcao para calcular o valor de acordo com o metodo escolhido
-        resultado = estima_erro_lagrange(lista_pontos, abcissa)
-        print(f"\nErro pelo metodo de Lagrange: {resultado:.4f}")
+        resultado = estima_erro_lagrange(lista_pontos, abscissa)
+        print(f"\nErro pelo metodo de Lagrange: {resultado}")
     
     elif opcao == 6:
         print("\n=== Iniciando a estimativa de erro para o método de Newton ===")
-        abcissa = float(input("Digite o valor da abcissa para o ponto desejado: "))
+        abscissa = float(input("Digite o valor da abcissa para o ponto desejado: "))
         
         # Chama a funcao para calcular o valor de acordo com o metodo escolhido
-        resultado = estima_erro_lagrange(lista_pontos, abcissa)
-        print(f"\nErro pelo metodo de Newton: {resultado:.4f}")
+        resultado = estima_erro_lagrange(lista_pontos, abscissa)
+        print(f"\nErro pelo metodo de Newton: {resultado}")
         
 
 def main():
