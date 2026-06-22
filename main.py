@@ -1,7 +1,7 @@
 # Trabalho realizado para a disciplina de Algoritmos Numericos
 # Alunos: Jonathan Alves, Leandro Grazziotin e Victor Toniato
 
-from sympy import symbols, simplify, expand
+from sympy import symbols, expand
 import math
 
 
